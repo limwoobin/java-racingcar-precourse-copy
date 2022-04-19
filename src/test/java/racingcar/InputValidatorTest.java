@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import racingcar.domain.ExceptionType;
 import racingcar.domain.validator.InputValidator;
+import racingcar.domain.validator.impl.MoveCountValidator;
 import racingcar.domain.validator.impl.CarNamesOverlapValidator;
 import racingcar.domain.validator.impl.CarNamesLengthValidator;
 import racingcar.domain.validator.impl.CarQtyValidator;
@@ -70,6 +71,27 @@ public class InputValidatorTest {
                 Arguments.of("123 , 123 , wes"),
                 Arguments.of("qq.we , qq3 , qq.we"),
                 Arguments.of("jack , dani , deny , dani")
+        );
+    }
+
+    @DisplayName("1~9 이외의 시도횟수가 입력된다면 IllegalArgumentException 이 발생해야 한다")
+    @ParameterizedTest(name = "input={0}")
+    @MethodSource("잘못된_시도횟수_입력값")
+    void move_count_input_test(String input) {
+        InputValidator validator = new MoveCountValidator();
+
+        assertThatThrownBy(() -> validator.validate(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ExceptionType.INVALID_MOVE_COUNT_INPUT.getMessage());
+    }
+
+    private static Stream<? extends Arguments> 잘못된_시도횟수_입력값() {
+        return Stream.of(
+                Arguments.of("-5"),
+                Arguments.of("asd"),
+                Arguments.of(""),
+                Arguments.of("11"),
+                Arguments.of("23")
         );
     }
 }
