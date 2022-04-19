@@ -11,13 +11,14 @@ public class CarNamesLengthValidator implements InputValidator {
     @Override
     public void validate(String input) {
         List<String> carNames = Arrays.asList(input.split(COMMA));
+        carNames.replaceAll(String::trim);
         for (String name : carNames) {
             validateNameLength(name);
         }
     }
 
     private void validateNameLength(String name) {
-        if (name.trim().length() > MAX_NAME_LENGTH) {
+        if (name.length() > MAX_NAME_LENGTH) {
             throw new IllegalArgumentException(ExceptionType.IS_NAME_LENGTH_OVER_FIVE.getMessage());
         }
     }

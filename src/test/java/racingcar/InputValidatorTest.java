@@ -13,7 +13,7 @@ import racingcar.domain.validator.impl.CarNamesOverlapValidator;
 import racingcar.domain.validator.impl.CarNamesLengthValidator;
 import racingcar.domain.validator.impl.CarQtyValidator;
 
-public class ValidatorTest {
+public class InputValidatorTest {
 
     @DisplayName("자동차의 이름이 5자 이상이라면 IllegalArgumentException 이 발생해야 한다")
     @ParameterizedTest(name = "input={0}")
