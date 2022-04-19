@@ -3,6 +3,7 @@
 - 자동차의 이름을 입력받는 기능에 대해, 테스트 코드를 작성하여 검증하고, 기능을 구현하라
   - 자동차의 이름이 5자리를 초과하면 IllegalArgumentException 발생시킨다
   - 입력한 자동차가 최소 2대 이상이어야 한다, 아니라면 IllegalArgumentException 을 발생시킨다 (추가 요구사항)
+  - 자동차의 이름이 중복되면 IllegalArgumentException 을 발생시킨다 (추가 요구사항)
 - 사용자가 몇번을 이동할지 입력하는 기능에 대해 테스트 코드를 작성하여 검증하고 기능을 구현하라
   - 이동할 수 있는 값은 정수만 와야한다. 아니라면 IllegalArgumentException 을 발생시킨다
   - 이동할 수 있는 숫자는 0~10 사이다. 아니라면 IllegalArgumentException 을 발생시킨다 (추가 요구사항)
