@@ -2,6 +2,7 @@ package racingcar.input;
 
 import camp.nextstep.edu.missionutils.Console;
 import racingcar.domain.validator.CarNamesValidatorGroup;
+import racingcar.view.OutputView;
 
 public class RacingCarInput {
     private final CarNamesValidatorGroup carNamesValidatorGroup;
@@ -13,8 +14,16 @@ public class RacingCarInput {
     }
 
     private String validateCarNames() {
-        String carNamesInput = Console.readLine();
-        this.carNamesValidatorGroup.validate(carNamesInput);
+        String carNamesInput = "";
+
+        try {
+            carNamesInput = Console.readLine();
+            this.carNamesValidatorGroup.validate(carNamesInput);
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return validateCarNames();
+        }
+
         return carNamesInput;
     }
 
