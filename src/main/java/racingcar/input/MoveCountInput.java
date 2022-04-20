@@ -1,16 +1,17 @@
 package racingcar.input;
 
 import camp.nextstep.edu.missionutils.Console;
+import racingcar.domain.MoveCount;
 import racingcar.domain.validator.InputValidator;
 
 public class MoveCountInput {
     private final InputValidator inputValidator;
-    private final int moveCount;
+    private final int moveCountInteger;
 
     public MoveCountInput(InputValidator inputValidator) {
         this.inputValidator = inputValidator;
         String moveCountInput = this.receiveMoveCountInput();
-        this.moveCount = Integer.parseInt(moveCountInput);
+        this.moveCountInteger = Integer.parseInt(moveCountInput);
     }
 
     private String receiveMoveCountInput() {
@@ -19,7 +20,7 @@ public class MoveCountInput {
         return moveCountInput;
     }
 
-    public int getMoveCount() {
-        return moveCount;
+    public MoveCount getMoveCount() {
+        return new MoveCount(moveCountInteger);
     }
 }

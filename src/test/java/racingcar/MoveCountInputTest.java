@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.MockedStatic;
 import racingcar.domain.ExceptionType;
+import racingcar.domain.MoveCount;
 import racingcar.domain.validator.InputValidator;
 import racingcar.domain.validator.impl.MoveCountValidator;
 import racingcar.input.MoveCountInput;
@@ -42,7 +43,8 @@ public class MoveCountInputTest {
                 .thenReturn(input);
 
         MoveCountInput moveCountInput = new MoveCountInput(validator);
-        assertEquals(moveCountInput.getMoveCount(), Integer.parseInt(input));
+        MoveCount moveCount = moveCountInput.getMoveCount();
+        assertEquals(moveCount.getRemainingMoveCount(), Integer.parseInt(input));
     }
 
     private static Stream<? extends Arguments> 정상적인_이동횟수_입력값() {
