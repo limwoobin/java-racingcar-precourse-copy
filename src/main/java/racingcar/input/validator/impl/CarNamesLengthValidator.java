@@ -4,13 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 import racingcar.domain.ExceptionType;
 import racingcar.input.validator.InputValidator;
+import racingcar.utils.WordUtils;
 
 public class CarNamesLengthValidator implements InputValidator {
     private static final int MAX_NAME_LENGTH = 5;
 
     @Override
     public void validate(String input) {
-        List<String> carNames = Arrays.asList(input.split(COMMA));
+        List<String> carNames = Arrays.asList(input.split(WordUtils.COMMA));
         carNames.replaceAll(String::trim);
         for (String name : carNames) {
             validateNameLength(name);
