@@ -11,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.MockedStatic;
+import racingcar.domain.strategy.RandomNumberMoveStrategy;
 
 public class CarMoveTest {
     private MockedStatic<Randoms> randoms;
@@ -29,7 +30,7 @@ public class CarMoveTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2, 3})
     void car_not_move_test(int randomNumber) {
-        Car car = new Car("test", new MoveBehavior());
+        Car car = new Car("test", new RandomNumberMoveStrategy());
 
         when(Randoms.pickNumberInRange(0,9))
                 .thenReturn(randomNumber);
@@ -42,7 +43,7 @@ public class CarMoveTest {
     @ParameterizedTest
     @ValueSource(ints = {4, 5, 6, 7, 8, 9})
     void car_move_test(int randomNumber) {
-        Car car = new Car("test", new MoveBehavior());
+        Car car = new Car("test", new RandomNumberMoveStrategy());
 
         when(Randoms.pickNumberInRange(0,9))
                 .thenReturn(randomNumber);

@@ -1,13 +1,15 @@
 package racingcar.domain;
 
+import racingcar.domain.strategy.MoveStrategy;
+
 public class Car {
     private final String name;
-    private final MoveBehavior moveBehavior;
+    private final MoveStrategy moveStrategy;
     private final Distance distance;
 
-    public Car(String name, MoveBehavior moveBehavior) {
+    public Car(String name, MoveStrategy moveStrategy) {
         this.name = name;
-        this.moveBehavior = moveBehavior;
+        this.moveStrategy = moveStrategy;
         this.distance = new Distance();
     }
 
@@ -16,7 +18,7 @@ public class Car {
     }
 
     public void move() {
-        if (moveBehavior.isMovable()) {
+        if (moveStrategy.isMovable()) {
             this.distance.advance();
         }
     }

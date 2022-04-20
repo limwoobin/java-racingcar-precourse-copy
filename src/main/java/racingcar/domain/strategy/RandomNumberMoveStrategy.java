@@ -1,11 +1,13 @@
-package racingcar.domain;
+package racingcar.domain.strategy;
 
-public class MoveBehavior {
+import racingcar.domain.RandomNumber;
+
+public class RandomNumberMoveStrategy implements MoveStrategy {
     private final RandomNumber randomNumber;
 
     private static final int MOVABLE_STANDARD_VALUE = 4;
 
-    public MoveBehavior() {
+    public RandomNumberMoveStrategy() {
         this.randomNumber = new RandomNumber();
     }
 
