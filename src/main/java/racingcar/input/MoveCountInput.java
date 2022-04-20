@@ -2,7 +2,7 @@ package racingcar.input;
 
 import camp.nextstep.edu.missionutils.Console;
 import racingcar.domain.MoveCount;
-import racingcar.domain.validator.InputValidator;
+import racingcar.input.validator.InputValidator;
 import racingcar.view.OutputView;
 
 public class MoveCountInput {

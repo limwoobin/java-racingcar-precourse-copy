@@ -1,7 +1,7 @@
-package racingcar.domain.validator.impl;
+package racingcar.input.validator.impl;
 
 import racingcar.domain.ExceptionType;
-import racingcar.domain.validator.InputValidator;
+import racingcar.input.validator.InputValidator;
 
 public class MoveCountValidator implements InputValidator {
     private static final String MOVE_COUNT_REGEX = "^[1-9]$";

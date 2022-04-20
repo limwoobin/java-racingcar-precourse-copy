@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.input;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -15,8 +15,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.MockedStatic;
 import racingcar.domain.ExceptionType;
-import racingcar.domain.validator.CarNamesValidatorGroup;
-import racingcar.input.RacingCarInput;
+import racingcar.input.validator.CarNamesValidatorGroup;
 
 public class RacingCarInputTest {
     private MockedStatic<Console> console;

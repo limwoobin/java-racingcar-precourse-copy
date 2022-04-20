@@ -1,4 +1,4 @@
-package racingcar.domain.validator;
+package racingcar.input.validator;
 
 public interface InputValidator {
     String COMMA = ",";

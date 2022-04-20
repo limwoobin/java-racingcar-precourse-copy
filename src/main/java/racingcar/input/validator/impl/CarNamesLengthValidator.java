@@ -1,9 +1,9 @@
-package racingcar.domain.validator.impl;
+package racingcar.input.validator.impl;
 
 import java.util.Arrays;
 import java.util.List;
 import racingcar.domain.ExceptionType;
-import racingcar.domain.validator.InputValidator;
+import racingcar.input.validator.InputValidator;
 
 public class CarNamesLengthValidator implements InputValidator {
     private static final int MAX_NAME_LENGTH = 5;

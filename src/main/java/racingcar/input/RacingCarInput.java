@@ -1,7 +1,7 @@
 package racingcar.input;
 
 import camp.nextstep.edu.missionutils.Console;
-import racingcar.domain.validator.CarNamesValidatorGroup;
+import racingcar.input.validator.CarNamesValidatorGroup;
 import racingcar.view.OutputView;
 
 public class RacingCarInput {

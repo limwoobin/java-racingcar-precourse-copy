@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.input;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,9 +16,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.MockedStatic;
 import racingcar.domain.ExceptionType;
 import racingcar.domain.MoveCount;
-import racingcar.domain.validator.InputValidator;
-import racingcar.domain.validator.impl.MoveCountValidator;
-import racingcar.input.MoveCountInput;
+import racingcar.input.validator.InputValidator;
+import racingcar.input.validator.impl.MoveCountValidator;
 
 public class MoveCountInputTest {
     private MockedStatic<Console> console;

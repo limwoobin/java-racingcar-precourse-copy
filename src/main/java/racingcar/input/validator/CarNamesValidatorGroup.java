@@ -1,10 +1,10 @@
-package racingcar.domain.validator;
+package racingcar.input.validator;
 
 import java.util.Arrays;
 import java.util.List;
-import racingcar.domain.validator.impl.CarNamesOverlapValidator;
-import racingcar.domain.validator.impl.CarNamesLengthValidator;
-import racingcar.domain.validator.impl.CarQtyValidator;
+import racingcar.input.validator.impl.CarNamesOverlapValidator;
+import racingcar.input.validator.impl.CarNamesLengthValidator;
+import racingcar.input.validator.impl.CarQtyValidator;
 
 public class CarNamesValidatorGroup {
     private final List<InputValidator> validators;

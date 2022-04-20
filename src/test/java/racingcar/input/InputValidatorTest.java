@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.input;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -8,11 +8,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import racingcar.domain.ExceptionType;
-import racingcar.domain.validator.InputValidator;
-import racingcar.domain.validator.impl.MoveCountValidator;
-import racingcar.domain.validator.impl.CarNamesOverlapValidator;
-import racingcar.domain.validator.impl.CarNamesLengthValidator;
-import racingcar.domain.validator.impl.CarQtyValidator;
+import racingcar.input.validator.InputValidator;
+import racingcar.input.validator.impl.MoveCountValidator;
+import racingcar.input.validator.impl.CarNamesOverlapValidator;
+import racingcar.input.validator.impl.CarNamesLengthValidator;
+import racingcar.input.validator.impl.CarQtyValidator;
 
 public class InputValidatorTest {
 
