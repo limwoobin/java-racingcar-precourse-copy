@@ -1,8 +1,12 @@
 package racingcar.input;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import camp.nextstep.edu.missionutils.Console;
@@ -10,11 +14,12 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.MockedStatic;
-import racingcar.domain.ExceptionType;
 import racingcar.input.validator.CarNamesValidatorGroup;
 
 public class RacingCarInputTest {
@@ -51,70 +56,40 @@ public class RacingCarInputTest {
         );
     }
 
-    @DisplayName("자동차 이름의 길이가 5를 넘는다면 IllegalArgumentException 를 반환해야 한다")
-    @ParameterizedTest(name = "input={0}")
-    @MethodSource("길이가5_이상인_자동차_이름_input")
-    void racingCarInput_length_failed_test(String input) {
-        CarNamesValidatorGroup carNamesValidatorGroup = new CarNamesValidatorGroup();
+    @Nested
+    @DisplayName("자동차 이름이 문제가 있으면 다시 입력받을 수 있어야 한다")
+    class RacingCarInputFailedTest {
+        String 잘못된_입력값_1 = "wood , mask23 , 1123789 , 2";
+        String 잘못된_입력값_2 = "test , test , 2 , mycar55";
+        String 잘못된_입력값_3 = "test10";
 
-        when(Console.readLine())
-                .thenReturn(input);
+        String 정상적인_입력값 = "pobi , wobe , rade , test";
 
-        assertThatThrownBy(() -> new RacingCarInput(carNamesValidatorGroup))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ExceptionType.IS_NAME_LENGTH_OVER_FIVE.getMessage());
-    }
+        @DisplayName("잘못된 값이 3번 입력되고 이후 정상적인 입력이 된다면 "
+                + "validate 는 4번 호출되어야 한다")
+        @Test
+        void racingCarInput_length_failed_test() {
+            CarNamesValidatorGroup validatorGroup = mock(CarNamesValidatorGroup.class);
 
-    private static Stream<? extends Arguments> 길이가5_이상인_자동차_이름_input() {
-        return Stream.of(
-                Arguments.of("wood , mask23 , 1123789 , 2"),
-                Arguments.of("test , qq , 2 , mycar55"),
-                Arguments.of("test10 , test11 , test12 , test13")
-        );
-    }
+            doThrow(new IllegalArgumentException()).when(validatorGroup)
+                    .validate(잘못된_입력값_1);
+            doThrow(new IllegalArgumentException()).when(validatorGroup)
+                    .validate(잘못된_입력값_2);
+            doThrow(new IllegalArgumentException()).when(validatorGroup)
+                    .validate(잘못된_입력값_3);
 
-    @DisplayName("자동차 개수가 2미만이라면 IllegalArgumentException 를 반환해야 한다")
-    @ParameterizedTest(name = "input={0}")
-    @MethodSource("개수가_2미만인_자동차_이름_input")
-    void racingCarInput_count_failed_test(String input) {
-        CarNamesValidatorGroup carNamesValidatorGroup = new CarNamesValidatorGroup();
+            when(Console.readLine())
+                    .thenReturn(
+                            잘못된_입력값_1,
+                            잘못된_입력값_2,
+                            잘못된_입력값_3,
+                            정상적인_입력값
+                    );
 
-        when(Console.readLine())
-                .thenReturn(input);
+            new RacingCarInput(validatorGroup);
 
-        assertThatThrownBy(() -> new RacingCarInput(carNamesValidatorGroup))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ExceptionType.IS_CAR_QTY_UNDER_TWO.getMessage());
-    }
-
-    private static Stream<? extends Arguments> 개수가_2미만인_자동차_이름_input() {
-        return Stream.of(
-                Arguments.of("wood"),
-                Arguments.of("test"),
-                Arguments.of("test1"),
-                Arguments.of(",,,")
-        );
-    }
-
-    @DisplayName("자동차의 이름이 중복된다면 IllegalArgumentException 를 반환해야 한다")
-    @ParameterizedTest(name = "input={0}")
-    @MethodSource("중복된_자동차_이름_input")
-    void racingCarInput_overlap_failed_test(String input) {
-        CarNamesValidatorGroup carNamesValidatorGroup = new CarNamesValidatorGroup();
-
-        when(Console.readLine())
-                .thenReturn(input);
-
-        assertThatThrownBy(() -> new RacingCarInput(carNamesValidatorGroup))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ExceptionType.NOT_CONTAINS_CAR_NAMES_OVERLAP.getMessage());
-    }
-
-    private static Stream<? extends Arguments> 중복된_자동차_이름_input() {
-        return Stream.of(
-                Arguments.of("wood, wood"),
-                Arguments.of("test, test"),
-                Arguments.of("test1, test1")
-        );
+            verify(validatorGroup, times(4))
+                    .validate(anyString());
+        }
     }
 }
