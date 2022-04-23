@@ -1,16 +1,18 @@
 package racingcar.input;
 
-import camp.nextstep.edu.missionutils.Console;
 import racingcar.domain.MoveCount;
 import racingcar.input.validator.InputValidator;
-import racingcar.view.OutputView;
+import racingcar.view.input.MoveCountInputMessageInput;
+import racingcar.view.output.OutputView;
 
 public class MoveCountInput {
     private final InputValidator inputValidator;
+    private final Input input;
     private final int moveCountInteger;
 
     public MoveCountInput(InputValidator inputValidator) {
         this.inputValidator = inputValidator;
+        this.input = new Input(new MoveCountInputMessageInput());
         this.moveCountInteger = Integer.parseInt(receiveMoveCountInput());
     }
 
@@ -18,7 +20,7 @@ public class MoveCountInput {
         String moveCountInput = "";
 
         try {
-            moveCountInput = Console.readLine();
+            moveCountInput = input.getMessage();
             inputValidator.validate(moveCountInput);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());

@@ -1,15 +1,17 @@
 package racingcar.input;
 
-import camp.nextstep.edu.missionutils.Console;
 import racingcar.input.validator.CarNamesValidatorGroup;
-import racingcar.view.OutputView;
+import racingcar.view.output.OutputView;
+import racingcar.view.input.RacingCarInputMessageInput;
 
 public class RacingCarInput {
     private final CarNamesValidatorGroup carNamesValidatorGroup;
+    private final Input input;
     private final String carNames;
 
     public RacingCarInput(CarNamesValidatorGroup carNamesValidatorGroup) {
         this.carNamesValidatorGroup = carNamesValidatorGroup;
+        input = new Input(new RacingCarInputMessageInput());
         carNames = this.validateCarNames();
     }
 
@@ -17,7 +19,7 @@ public class RacingCarInput {
         String carNamesInput = "";
 
         try {
-            carNamesInput = Console.readLine();
+            carNamesInput = input.getMessage();
             this.carNamesValidatorGroup.validate(carNamesInput);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
