@@ -23,7 +23,15 @@ public class Car {
         }
     }
 
+    public Distance getDistance() {
+        return distance;
+    }
+
     public int getDistanceCount() {
         return distance.getDistanceCount();
+    }
+
+    public String getDistanceByDash() {
+        return distance.getDistanceByDash();
     }
 }

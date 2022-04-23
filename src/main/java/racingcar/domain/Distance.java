@@ -14,7 +14,7 @@ public class Distance {
         return distanceCount;
     }
 
-    public String getDistanceLine() {
+    public String getDistanceByDash() {
         return distanceLine;
     }
 

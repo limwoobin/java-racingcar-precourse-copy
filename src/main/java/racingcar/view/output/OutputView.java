@@ -17,6 +17,7 @@ public class OutputView {
             raceStatus(car);
         }
     }
+
     private static void raceStatus(Car car) {
         System.out.println(car.getName() + ": " + car.getDistanceByDash());
     }
