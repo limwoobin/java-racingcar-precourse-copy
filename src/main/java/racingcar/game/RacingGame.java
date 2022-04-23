@@ -6,6 +6,7 @@ import racingcar.input.MoveCountInput;
 import racingcar.input.RacingCarInput;
 import racingcar.input.validator.CarNamesValidatorGroup;
 import racingcar.input.validator.impl.MoveCountValidator;
+import racingcar.view.output.OutputView;
 
 public class RacingGame {
     public static void play() {
@@ -17,5 +18,8 @@ public class RacingGame {
 
         Race race = new Race(cars, moveCount);
         race.start();
+
+        RaceJudgment raceJudgment = new RaceJudgment(cars);
+        OutputView.printWinners(raceJudgment.getWinners());
     }
 }
