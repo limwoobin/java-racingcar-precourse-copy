@@ -2,6 +2,7 @@ package racingcar.game;
 
 import racingcar.domain.Cars;
 import racingcar.domain.MoveCount;
+import racingcar.view.output.OutputView;
 
 public class Race {
     private final Cars cars;
@@ -16,6 +17,7 @@ public class Race {
         while (moveCount.isMovableCount()) {
             moveCount.decrease();
             cars.move();
+            OutputView.printRaceStatus(cars);
         }
     }
 }
